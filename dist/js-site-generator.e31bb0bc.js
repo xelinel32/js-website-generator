@@ -530,28 +530,64 @@ var Sidebar = /*#__PURE__*/function () {
 }();
 
 exports.Sidebar = Sidebar;
-},{"../utils/utils":"utils/utils.js","./classModels":"model/classModels.js"}],"index.js":[function(require,module,exports) {
+},{"../utils/utils":"utils/utils.js","./classModels":"model/classModels.js"}],"model/app.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.App = void 0;
+
+var _point = require("./point");
+
+var _classSidebar = require("./classSidebar");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var App = /*#__PURE__*/function () {
+  function App(model) {
+    _classCallCheck(this, App);
+
+    this.model = model;
+  }
+
+  _createClass(App, [{
+    key: "init",
+    value: function init() {
+      var _this = this;
+
+      // $ - dom element
+      var main = new _point.Point('main');
+      main.$render(this.model);
+      new _classSidebar.Sidebar('panel', function (newBlock) {
+        _this.model.push(newBlock);
+
+        main.$render(_this.model);
+      });
+    }
+  }]);
+
+  return App;
+}();
+
+exports.App = App;
+},{"./point":"model/point.js","./classSidebar":"model/classSidebar.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 require("./style/style.scss");
 
 var _model = _interopRequireDefault(require("./model/model"));
 
-var _point = require("./model/point");
-
-var _classSidebar = require("./model/classSidebar");
+var _app = require("./model/app");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// $ - dom element
-var main = new _point.Point('main');
-main.$render(_model.default);
-new _classSidebar.Sidebar('panel', function (newBlock) {
-  _model.default.push(newBlock);
-
-  main.$render(_model.default);
-});
-},{"./style/style.scss":"style/style.scss","./model/model":"model/model.js","./model/point":"model/point.js","./model/classSidebar":"model/classSidebar.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+new _app.App(_model.default).init();
+},{"./style/style.scss":"style/style.scss","./model/model":"model/model.js","./model/app":"model/app.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -579,7 +615,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55366" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56819" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
