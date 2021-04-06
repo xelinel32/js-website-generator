@@ -1,6 +1,5 @@
 import img1 from '../assets/image1.png'
 import { TitleBlock, TextBlock, ColumnsBlock, ImageBlock } from './classModels'
-// нужно создать сущность модель и описать блок
 
 const title = new TitleBlock('Генератор для сайта на JS', {
   tag: 'h2',
